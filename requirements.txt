@@ -7,4 +7,5 @@ seaborn
 scipy
 catboost
 xgboost
-
+dill
+pickle 
