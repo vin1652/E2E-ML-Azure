@@ -44,10 +44,23 @@ class ModelTrainer:
                 'CatBoostRegressor': CatBoostRegressor(verbose=False)
             }
 
+            params = { 'LinearRegression': {},
+                'Lasso': {'alpha': [0.1, 0.5, 1.0]},
+                'Ridge': {'alpha': [0.1, 0.5, 1.0]},
+                'KNeighborsRegressor': {'n_neighbors': [3, 5, 7, 9]},
+                'DecisionTreeRegressor': {'max_depth': [None, 5, 10, 15]},
+                'RandomForestRegressor': {'n_estimators': [50, 100, 200]},
+                'GradientBoostingRegressor': {'n_estimators': [50, 100, 200]},
+                'AdaBoostRegressor': {'n_estimators': [50, 100, 200]},
+                'XGBRegressor': {'n_estimators': [50, 100, 200]},
+                'CatBoostRegressor': {'iterations': [50, 100], 'depth': [6, 8]}
+            }
+
             model_report : dict = evaluate_model(
                 X_train=X_train, y_train=y_train, 
                 X_test=X_test, y_test=y_test, 
-                models=models
+                models=models,
+                params=params
             )
 
             best_model_score = max(model_report.values())
